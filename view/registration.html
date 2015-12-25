@@ -1,0 +1,15 @@
+<!doctype HTML>
+<html>
+  <head>
+    <title>New user registration</title>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <form enctype="www-x-form-urlencoded" method="POST" action="/registration">
+      <p><input type="email" placeholder="Email"> {{.Email.Error}}</p>
+      <p><input type="password" placeholder="Password">{{.Password.Error}}</p>
+      <p><input type="text" placeholder="Nickname">{{.Nickname.Error}}</p>
+      <p><input type="submit" value="submit"></p>
+    </form>
+  </body>
+</html>

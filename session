@@ -1,0 +1,16 @@
+package main
+
+import (
+	"github.com/coldume/session"
+	"net/http"
+)
+
+var sessionStore = session.NewRethinkDBStore(dbSession, dbDatabase, dbSessionTable)
+
+func GetSession(req *http.Request) (*session.Session, error) {
+	sid, err := session.FromRequest(req, "login", sessionKey)
+	if err != nil {
+		return nil, nil
+	}
+	return sessionStore.Get(sid)
+}
