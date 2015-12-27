@@ -1,14 +1,29 @@
 <!doctype HTML>
 <html>
   <head>
-    <title>New user registration</title>
+    <title>Welcome to chat!</title>
     <meta charset="UTF-8">
   </head>
   <body>
     <form enctype="www-x-form-urlencoded" method="POST" action="/registration">
-      <p><input type="email" placeholder="Email"> {{.Email.Error}}</p>
-      <p><input type="password" placeholder="Password">{{.Password.Error}}</p>
-      <p><input type="text" placeholder="Nickname">{{.Nickname.Error}}</p>
+      {{with .Form}}
+        <p>
+          <input name="email" type="email" placeholder="Email" value="{{.Email.Value}}">
+          {{.Email.Error}}
+        </p>
+        <p>
+          <input name="password" type="password" placeholder="Password" value="{{.Password.Value}}">
+          {{.Password.Error}}
+        </p>
+        <p>
+          <input name="name" type="text" placeholder="Name" value="{{.Name.Value}}">
+          {{.Name.Error}}
+        </p>
+      {{else}}
+        <p><input name="email" type="email" placeholder="Email"></p>
+        <p><input name="password" type="password" placeholder="Password"></p>
+        <p><input name="name" type="text" placeholder="Name"></p>
+      {{end}}
       <p><input type="submit" value="submit"></p>
     </form>
   </body>

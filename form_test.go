@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var emailFieldTests = []struct {
+var emailControlTests = []struct {
 	email string
 	ok    bool
 }{
@@ -13,15 +13,16 @@ var emailFieldTests = []struct {
 	{"foo@,example.com", false},
 }
 
-func TestEmailField(t *testing.T) {
-	for i, test := range emailFieldTests {
-		_, ok := emailField.Validate(test.email); if ok != test.ok {
-			t.Errorf("%d: expect %s to be %v, got %v", i, test.email, test.ok, ok)
+func TestEmailControl(t *testing.T) {
+	for i, test := range emailControlTests {
+		c := &emailControl{value: test.email}
+		if ok := c.Validate(); ok != test.ok {
+			t.Errorf("%d: ok = %v, want %v", i, ok, test.ok)
 		}
 	}
 }
 
-var passwordFieldTests = []struct {
+var passwordControlTests = []struct {
 	password string
 	ok       bool
 }{
@@ -30,26 +31,28 @@ var passwordFieldTests = []struct {
 	{"world", false},
 }
 
-func TestPasswordField(t *testing.T) {
-	for i, test := range passwordFieldTests {
-		_, ok := passwordField.Validate(test.password); if ok != test.ok {
-			t.Errorf("%d: expect %s to be %v, got %v", i, test.password, test.ok, ok)
+func TestPasswordControl(t *testing.T) {
+	for i, test := range passwordControlTests {
+		c := &passwordControl{value: test.password}
+		if ok := c.Validate(); ok != test.ok {
+			t.Errorf("%d: ok = %v, want %v", i, ok, test.ok)
 		}
 	}
 }
 
-var nicknameFieldTests = []struct {
-	nickname string
+var nameControlTests = []struct {
+	name string
 	ok       bool
 }{
 	{"foo", true},
 	{"x", false},
 }
 
-func TestNicknameField(t *testing.T) {
-	for i, test := range nicknameFieldTests {
-		_, ok := nicknameField.Validate(test.nickname); if ok != test.ok {
-			t.Errorf("%d: expect %s to be %v, got %v", i, test.nickname, test.ok, ok)
+func TestNameControl(t *testing.T) {
+	for i, test := range nameControlTests {
+		c := &nameControl{value: test.name}
+		if ok := c.Validate(); ok != test.ok {
+			t.Errorf("%d: ok = %v, want %v", i, ok, test.ok)
 		}
 	}
 }

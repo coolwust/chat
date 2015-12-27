@@ -67,7 +67,7 @@ func main() {
 	}
 	m := mux.NewServeMux()
 	//m.HandleFunc(`^/$`, indexHandler)
-	//m.HandleFunc(`^/registration$`, registrationHandler)
+	m.HandleFunc(`^/registration$`, registrationHandler)
 	serv := &http.Server{Handler: m}
 	if err := serv.Serve(listener); err != nil {
 		panic(err)
