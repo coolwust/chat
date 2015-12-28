@@ -19,9 +19,9 @@ func TestFormValidate(t *testing.T) {
 	rSetUp()
 	for i, tt := range formValidateTests {
 		f := &registrationForm{
-			Email:    &emailControl{value: tt.email},
-			Password: &passwordControl{value: tt.passwd},
-			Name:     &nameControl{value: tt.name},
+			Email:    &emailControl{value: tt.email, activated: true},
+			Password: &passwordControl{value: tt.passwd, activated: true},
+			Name:     &nameControl{value: tt.name, activated: true},
 		}
 		if ok := f.Validate(); ok != tt.ok {
 			t.Error("%d: ok = %v, want %v", i, ok, tt.ok)

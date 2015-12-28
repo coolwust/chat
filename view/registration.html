@@ -1,30 +1,48 @@
 <!doctype HTML>
 <html>
   <head>
-    <title>Welcome to chat!</title>
+    <title>New user registration</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/public/css/form.css">
+    <script defer>
+      document.addEventListener('DOMContentLoaded', function () {
+        var show = document.querySelector('form input[name="show"]');
+        show.addEventListener('click', function () {
+          var passwd = document.querySelector('form input[name="password"]');
+          if (show.value === 'show') {
+            show.value = 'hide';
+            passwd.type = 'text';
+          } else {
+            show.value = 'show';
+            passwd.type = 'password';
+          }
+        });
+      });
+    </script>
   </head>
   <body>
-    <form enctype="www-x-form-urlencoded" method="POST" action="/registration">
+    <div>
       {{with .Form}}
-        <p>
-          <input name="email" type="email" placeholder="Email" value="{{.Email.Value}}">
-          {{.Email.Error}}
-        </p>
-        <p>
-          <input name="password" type="password" placeholder="Password" value="{{.Password.Value}}">
-          {{.Password.Error}}
-        </p>
-        <p>
-          <input name="name" type="text" placeholder="Name" value="{{.Name.Value}}">
-          {{.Name.Error}}
-        </p>
-      {{else}}
-        <p><input name="email" type="email" placeholder="Email"></p>
-        <p><input name="password" type="password" placeholder="Password"></p>
-        <p><input name="name" type="text" placeholder="Name"></p>
+        <form enctype="www-x-form-urlencoded" method="POST" action="/registration">
+          <p>
+            <label for="email">Email ({{.Email.Hint}})</label>
+            <input name="email" type="email" value="{{.Email.Value}}">
+            <div>{{.Email.Error}}</div>
+          </p>
+          <p>
+            <label for="password">Password ({{.Password.Hint}})</label>
+            <input name="password" type="password" value="{{.Password.Value}}">
+            <input type="button" name="show" value="show">
+            <div>{{.Password.Error}}</div>
+          </p>
+          <p>
+            <label for="name">Name ({{.Name.Hint}})</label>
+            <input name="name" type="text" value="{{.Name.Value}}">
+            <div>{{.Name.Error}}</div>
+          </p>
+          <p><input type="submit" name="submit" value="submit"></p>
+        </form>
       {{end}}
-      <p><input type="submit" value="submit"></p>
-    </form>
+    </div>
   </body>
 </html>

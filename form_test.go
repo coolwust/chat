@@ -15,7 +15,7 @@ var emailControlTests = []struct {
 
 func TestEmailControl(t *testing.T) {
 	for i, test := range emailControlTests {
-		c := &emailControl{value: test.email}
+		c := &emailControl{value: test.email, activated: true}
 		if ok := c.Validate(); ok != test.ok {
 			t.Errorf("%d: ok = %v, want %v", i, ok, test.ok)
 		}
@@ -33,7 +33,7 @@ var passwordControlTests = []struct {
 
 func TestPasswordControl(t *testing.T) {
 	for i, test := range passwordControlTests {
-		c := &passwordControl{value: test.password}
+		c := &passwordControl{value: test.password, activated: true}
 		if ok := c.Validate(); ok != test.ok {
 			t.Errorf("%d: ok = %v, want %v", i, ok, test.ok)
 		}
@@ -50,7 +50,7 @@ var nameControlTests = []struct {
 
 func TestNameControl(t *testing.T) {
 	for i, test := range nameControlTests {
-		c := &nameControl{value: test.name}
+		c := &nameControl{value: test.name, activated: true}
 		if ok := c.Validate(); ok != test.ok {
 			t.Errorf("%d: ok = %v, want %v", i, ok, test.ok)
 		}

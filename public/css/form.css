@@ -1,0 +1,29 @@
+form {
+    width: 400px;
+}
+
+form p {
+}
+
+form p label {
+    display: table-cell;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+form p input:not([name="submit"]):not([name="show"]) {
+    height: 29px;
+    width: 100%;
+}
+
+form p input[name="password"] {
+    padding-right: 70px !important;
+    margin-right: -35px;
+    width: calc(100% - 70px) !important;
+}
+
+form p input[name="show"] {
+    margin-left: -35px;
+    width: 55px;
+    height: 28px;
+}

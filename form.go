@@ -18,9 +18,10 @@ type control interface {
 var _ control = &emailControl{}
 
 type emailControl struct {
-	value  string
-	ok     *bool
-	exists bool
+	value     string
+	ok        *bool
+	exists    bool
+	activated bool
 }
 
 func (f *emailControl) Value() string {
@@ -28,10 +29,13 @@ func (f *emailControl) Value() string {
 }
 
 func (f *emailControl) Hint() string {
-	return "Email"
+	return "example: mike@example.com"
 }
 
 func (f *emailControl) Validate() (ok bool) {
+	if !f.activated {
+		return true
+	}
 	if f.ok != nil {
 		return *f.ok
 	}
@@ -59,8 +63,9 @@ func (f *emailControl) Error() string {
 var _ control = &passwordControl{}
 
 type passwordControl struct {
-	value string
-	ok    *bool
+	value     string
+	ok        *bool
+	activated bool
 }
 
 func (f *passwordControl) Value() string {
@@ -68,10 +73,13 @@ func (f *passwordControl) Value() string {
 }
 
 func (f *passwordControl) Hint() string {
-	return "Password (6-100 characters)"
+	return "6-100 characters"
 }
 
 func (f *passwordControl) Validate() bool {
+	if !f.activated {
+		return true
+	}
 	if f.ok != nil {
 		return *f.ok
 	}
@@ -90,8 +98,9 @@ func (f *passwordControl) Error() string {
 var _ control = &nameControl{}
 
 type nameControl struct {
-	value string
-	ok    *bool
+	value     string
+	ok        *bool
+	activated bool
 }
 
 func (f *nameControl) Value() string {
@@ -99,10 +108,13 @@ func (f *nameControl) Value() string {
 }
 
 func (f *nameControl) Hint() string {
-	return "Name (3-30 English characters)"
+	return "3-30 English characters"
 }
 
 func (f *nameControl) Validate() bool {
+	if !f.activated {
+		return true
+	}
 	if f.ok != nil {
 		return *f.ok
 	}

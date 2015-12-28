@@ -68,6 +68,7 @@ func main() {
 	m := mux.NewServeMux()
 	//m.HandleFunc(`^/$`, indexHandler)
 	m.HandleFunc(`^/registration$`, registrationHandler)
+	m.Handle("^/public/", http.FileServer(http.Dir(".")))
 	serv := &http.Server{Handler: m}
 	if err := serv.Serve(listener); err != nil {
 		panic(err)

@@ -18,9 +18,9 @@ func parseRegistrationForm(r *http.Request) (*registrationForm, error) {
 		return nil, err
 	}
 	return &registrationForm{
-		Email:    &emailControl{value: r.PostForm.Get("email")},
-		Password: &passwordControl{value: r.PostForm.Get("password")},
-		Name:     &nameControl{value: r.PostForm.Get("name")},
+		Email:    &emailControl{value: r.PostForm.Get("email"), activated: true},
+		Password: &passwordControl{value: r.PostForm.Get("password"), activated: true},
+		Name:     &nameControl{value: r.PostForm.Get("name"), activated: true},
 	}, nil
 }
 
@@ -43,7 +43,12 @@ type registrationData struct {
 
 func registrationHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		template.Must(template.ParseFiles("./view/registration.html")).Execute(w, nil)
+		data := &registrationData{Form: &registrationForm{
+			Email:    &emailControl{},
+			Password: &passwordControl{},
+			Name:     &nameControl{},
+		}}
+		template.Must(template.ParseFiles("./view/registration.html")).Execute(w, data)
 		return
 	}
 	f, err := parseRegistrationForm(r)
